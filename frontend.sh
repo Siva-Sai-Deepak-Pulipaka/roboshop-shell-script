@@ -1,5 +1,5 @@
 #source common.sh
-dir=${pwd}
+#dir=${pwd}
 print_head()
 {
     echo -e "\e[36m$1\e[0m"
@@ -15,7 +15,7 @@ unzip /tmp/frontend.zip
 #cp config-files/nginx-roboshop.conf /etc/nginx/default.d/roboshop.conf
 #The above line is the actual command to access the config file. But after we run the above commands based on document we will be in /usr/share/nginx/html so config-files directory is not presented here. so we are declaring variable at the start. Because script always run from top to bottom.
 print_head "copying nginx configuration file "
-cp ${dir}/nginx-roboshop.conf /etc/nginx/default.d/roboshop.conf
+cp config-files/nginx-roboshop.conf /etc/nginx/default.d/roboshop.conf
 print_head "enabling nginx"
 systemctl enable nginx 
 #we have implemented restart because nginx gets updated everytime we make changes in our components
