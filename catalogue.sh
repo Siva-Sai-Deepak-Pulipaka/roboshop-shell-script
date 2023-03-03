@@ -37,5 +37,5 @@ print_head "installing mongodb repo"
 cp config-files/mongodb.repo /etc/yum.repos.d/mongo.repo &>>${log_file}
 
 print_head "installing mongo client and connected to host"
-yum install mongodb-org-shell -y &>>${log_file}
-mongo --host mongodb.easydevops.online </app/schema/catalogue.js &>>${log_file}
+yum install mongodb-org-shell -y 2>>/tmp/err
+mongo --host mongodb.easydevops.online </app/schema/catalogue.js 2>>/tmp/err
