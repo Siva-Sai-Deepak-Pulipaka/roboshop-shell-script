@@ -1,4 +1,10 @@
-source common.sh
+#source common.sh
+log_file=/tmp/roboshop.log
+rm -f ${log_file} #we want to get updated log for every command so we are using this strategy that we are removing log file earlier.
+print_head()
+{
+    echo -e "\e[32m$1\e[0m"
+}
 print_head "copying repo file"
 cp config-files/mongodb.repo /etc/yum.repos.d/mongo.repo &>>${log_file}
 print_head "installing mongodb"
