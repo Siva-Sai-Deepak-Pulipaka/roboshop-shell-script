@@ -1,5 +1,9 @@
-source common.sh
+#source common.sh
 dir=${pwd}
+print_head()
+{
+    echo -e "\e[36m$1\e[0m"
+}
 print_head "installing nginx"
 yum install nginx -y 
 print_head "removing old content in nginx html"
