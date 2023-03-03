@@ -5,13 +5,13 @@ print_head()
     echo -e "\e[32m$1\e[0m"
 }
 print_head "running the script to get nodejs repo file"
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${log_file}
 yum install nodejs -y &>>${log_file}
 
 print_head "adding roboshop-user"
 useradd roboshop &>>${log_file}
 
-echo -e "\e[m34Creating app directory\e[0m" # just testing the echo command 
+echo -e "\e[m34Creating app directory\e[0m" &>>${log_file} # just testing the echo command 
 mkdir /app &>>${log_file}
 rm -rf /app/* #we are removing the contents to sattisfy code standard (re-run should never fail)
 
@@ -23,7 +23,7 @@ print_head "extracted files"
 unzip /tmp/catalogue.zip &>>${log_file}
 
 print_head "installing node package manager"
-npm install 
+npm install &>>${log_file}
 
 print_head "creating catalogue service file"
 cp config-files/catalogue.service /etc/systemd/system/catalogue.service &>>${log_file}
