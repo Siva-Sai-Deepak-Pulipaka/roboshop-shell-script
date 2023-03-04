@@ -1,4 +1,4 @@
-code_dir = $(pwd)
+code_dir=$(pwd)
 log_file=/tmp/roboshop.log
 rm -f ${log_file} #we want to get updated log for every command so we are using this strategy that we are removing log file earlier.
 print_head()
@@ -38,5 +38,5 @@ print_head "installing mongodb repo"
 cp ${code_dir}/config-files/mongodb.repo /etc/yum.repos.d/mongo.repo &>>${log_file}
 
 print_head "installing mongo client and connected to host"
-yum install mongodb-org-shell -y 2>>/tmp/err
-mongo --host mongodb.easydevops.online </app/schema/catalogue.js 2>>/tmp/err
+yum install mongodb-org-shell -y 
+mongo --host mongodb.easydevops.online </app/schema/catalogue.js 
