@@ -1,3 +1,4 @@
+code_dir = $(pwd)
 log_file=/tmp/roboshop.log
 rm -f ${log_file} #we want to get updated log for every command so we are using this strategy that we are removing log file earlier.
 print_head()
@@ -26,7 +27,7 @@ print_head "installing node package manager"
 npm install &>>${log_file}
 
 print_head "creating catalogue service file"
-cp config-files/catalogue.service /etc/systemd/system/catalogue.service &>>${log_file}
+cp ${code_dir}/config-files/catalogue.service /etc/systemd/system/catalogue.service &>>${log_file}
 
 print_head "changes updated, enabled and started catalogue server"
 systemctl daemon-reload &>>${log_file}
@@ -34,7 +35,7 @@ systemctl enable catalogue &>>${log_file}
 systemctl start catalogue &>>${log_file}
 
 print_head "installing mongodb repo"
-cp config-files/mongodb.repo /etc/yum.repos.d/mongo.repo &>>${log_file}
+cp ${code_dir}/config-files/mongodb.repo /etc/yum.repos.d/mongo.repo &>>${log_file}
 
 print_head "installing mongo client and connected to host"
 yum install mongodb-org-shell -y 2>>/tmp/err
