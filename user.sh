@@ -1,3 +1,5 @@
+user(){
+
 code_dir=$(pwd)
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
@@ -13,3 +15,6 @@ cp ${code_dir}/config-files/user.service /etc/systemd/system/user.service
 systemctl daemon-reload
 systemctl enable user 
 systemctl start user
+
+}
+user
