@@ -12,7 +12,7 @@ yum install nodejs -y &>>${log_file}
 print_head "adding roboshop-user"
 useradd roboshop &>>${log_file}
 
-echo -e "\e[m34Creating app directory\e[0m"  # just testing the echo command 
+echo -e "\e[34mCreating app directory\e[0m"  # just testing the echo command 
 mkdir /app &>>${log_file}
 rm -rf /app/* #we are removing the contents to sattisfy code standard (re-run should never fail)
 
