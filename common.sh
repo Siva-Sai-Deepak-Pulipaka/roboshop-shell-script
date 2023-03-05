@@ -32,7 +32,8 @@ fi
 status_check $?
 
 print_head "creating app directory "
-mkdir /app &>>${log_file}
+if [ ! -d /app ]; then          #Here if you run this line status shows failure but its not a failure. re-run leads to condition failure as we mentioned in 'status_check' function above. so to avoid it displaying failure we specified condition 
+mkdir /app &>>${log_file}       
 status_check $?
 
 print_head "removing contents if any"
