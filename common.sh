@@ -75,4 +75,5 @@ yum install mongodb-org-shell -y &>>${log_file}
 status_check $?
 mongo --host mongodb.easydevops.online </app/schema/${component}.js &>>${log_file}
 status_check $?
+
 }
