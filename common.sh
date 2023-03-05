@@ -5,3 +5,11 @@ print_head()
 {
     echo -e "\e[32m$1\e[0m"
 }
+status_check ()
+{
+    if [ $1 -ne 0]; then
+    echo success
+    else
+    echo failure
+    fi
+}
