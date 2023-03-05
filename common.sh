@@ -93,6 +93,11 @@ NODEJS()
 
 SYSTEMD_SETUP()
 {
+    print_head "copying service file"
+    cp ${code_dir}/config-files/${component}.service /etc/systemd/system/${component}.service &>>${log_file}
+    status_check $?
+
+    sed -i -e "s/rabbitmq_user_pass/${rabbitmq_user_pass}/" /etc/systemd/system/${component}.service &>>${log_file}
     print_head "reloading ${component} service "
     systemctl daemon-reload &>>${log_file}
     status_check $?
@@ -120,4 +125,14 @@ JAVA()
     SCHEMA_SETUP
     #Here According to documentation, SYSTEMD_SETUP(systemd enable restart) is to present before the SCHEMA_SETUP but we are placing after schema just to restart after all changes. 
     SYSTEMD_SETUP 
+}
+
+PYTHON()
+{
+    yum install python36 gcc python3-devel -y &>>${log_file}
+    status_check $?
+    ROBOSHOP_APP_SETUP
+
+    pip3.6 install -r requirements.txt &>>${log_file}
+    status_check $?
 }
