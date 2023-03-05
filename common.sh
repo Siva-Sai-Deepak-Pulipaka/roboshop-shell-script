@@ -10,6 +10,6 @@ status_check()
     if [ $1 -eq 0 ]; then
     echo success
     else
-    echo failure
+    echo -e "\e[31mfailure\e[0m"
     fi
 }
