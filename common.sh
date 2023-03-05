@@ -88,6 +88,7 @@ NODEJS()
 
     #here for both mysql and shipping systemctl daemon-reload, enable, and restart are same. so we are creating a function named SYSTEMD_SETUP and calling it.    
     SCHEMA_SETUP
+    SYSTEMD_SETUP
 }
 
 SYSTEMD_SETUP()
@@ -98,7 +99,7 @@ SYSTEMD_SETUP()
 
     print_head "enabling and starting ${component} service"
     systemctl enable ${component} &>>${log_file}
-    systemctl start ${component} &>>${log_file}
+    systemctl restart ${component} &>>${log_file}
     status_check $?
 }
 
