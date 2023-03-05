@@ -9,22 +9,22 @@ dnf module disable mysql -y &>>${log_file}
 status_check $?
 
 print_head "coping/installing mysql repo"
-cp config-files/mysql.repo /etc/yum.repos.d/mysql.repo
+cp config-files/mysql.repo /etc/yum.repos.d/mysql.repo &>>${log_file}
 status_check $?
 
 print_head "installing particular mysql "
-yum install mysql-community-server -y
+yum install mysql-community-server -y &>>${log_file}
 status_check $?
 
 print_head "enabling and starting mysql server"
-systemctl enable mysqld
-systemctl start mysqld
+systemctl enable mysqld &>>${log_file}
+systemctl start mysqld &>>${log_file}
 status_check $?
 
 print_head "set password for mysql"
-mysql_secure_installation --set-root-pass ${mysql_root_pass}
+echo show databases | mysql -uroot -p${mysql_root_pass} &>>${log_file}
+if [ $? -ne 0 ]; then
+mysql_secure_installation --set-root-pass ${mysql_root_pass} &>>${log_file}
 status_check $?
 
-print_head "testing credentials"
-mysql -uroot -p${mysql_root_pass}
-status_check $?
+
