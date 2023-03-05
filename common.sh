@@ -107,14 +107,14 @@ SYSTEMD_SETUP()
 
 JAVA()
 {
-    yum install maven -y
+    yum install maven -y &>>${log_file} 
 
     ROBOSHOP_APP_SETUP #user add and creating app directory, downloading zip and extarct into app directory is quite common. so we are linking wherever required
     
     print_head "downloading packages and dependencies"
-    mvn clean package 
-    mv target/${component}-1.0.jar ${component}.jar
-    cp ${code_dir}/config-files/${component}.service /etc/systemd/system/${component}.service
+    mvn clean package &>>${log_file}
+    mv target/${component}-1.0.jar ${component}.jar &>>${log_file}
+    cp ${code_dir}/config-files/${component}.service /etc/systemd/system/${component}.service &>>${log_file}
     
     #here for both mysql and shipping systemctl daemon-reload, enable, and restart are same. so we are creating a function named SYSTEMD_SETUP and calling it.
     SCHEMA_SETUP
