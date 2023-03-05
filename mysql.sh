@@ -1,9 +1,7 @@
 source common.sh
-mysql_root_pass=$1
-if [ -z "${mysql_root_pass}" ]; then          # -z will check if the variable is empty. if it is empty returns 0 or else returns 1
-    echo "Enter mysql password"
-    exit 1 
-fi
+
+MYSQL_ENTER_PASSWORD_PROMPT #here enter password is same for both mysql and shipping. so we created a function and calling.
+
 print_head "disabling default mysql "
 dnf module disable mysql -y &>>${log_file}
 status_check $?
