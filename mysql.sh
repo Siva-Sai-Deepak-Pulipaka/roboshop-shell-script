@@ -26,5 +26,5 @@ mysql_secure_installation --set-root-pass ${mysql_root_pass}
 status_check $?
 
 print_head "testing credentials"
-mysql -uroot -pRoboShop@1
+mysql -uroot -p${mysql_root_pass}
 status_check $?
