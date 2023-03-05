@@ -14,6 +14,28 @@ status_check()
         echo -e "\e[31mfailure\e[0m"
     fi
 }
+
+SCHEMA_SETUP()
+{
+    if [ "${schema_type}" == "mongo" ]; then
+        print_head "installing mongodb repo"
+        cp ${code_dir}/config-files/mongodb.repo /etc/yum.repos.d/mongo.repo &>>${log_file}
+        status_check $?
+
+        print_head "installing mongo client and connected to mongo host to load schema"
+        yum install mongodb-org-shell -y &>>${log_file}
+        status_check $?
+        mongo --host mongodb.easydevops.online </app/schema/${component}.js &>>${log_file}
+        status_check $?
+    elif [ "${schema_type}" == "mysql" ]; then
+        print_head "install mysql client"
+        yum install mysql -y &>>${log_file}
+
+        print_head "loading mysql shipping schema"
+        mysql -h mysql.easydevops.online -uroot -p${mysql_root_pass} < /app/schema/shipping.sql &>>${log_file}
+    fi
+}
+
 ROBOSHOP_APP_SETUP()
 {
     print_head "creating roboshop user if not exists"
@@ -80,26 +102,7 @@ SYSTEMD_SETUP()
     status_check $?
 }
 
-SCHEMA_SETUP()
-{
-    if [ "${schema_type}" == "mongo" ]; then
-        print_head "installing mongodb repo"
-        cp ${code_dir}/config-files/mongodb.repo /etc/yum.repos.d/mongo.repo &>>${log_file}
-        status_check $?
 
-        print_head "installing mongo client and connected to mongo host to load schema"
-        yum install mongodb-org-shell -y &>>${log_file}
-        status_check $?
-        mongo --host mongodb.easydevops.online </app/schema/${component}.js &>>${log_file}
-        status_check $?
-    elif [ "${schema_type}" == "mysql" ]; then
-        print_head "install mysql client"
-        yum install mysql -y 
-
-        print_head "loading mysql shipping schema"
-        mysql -h mysql.easydevops.online -uroot -p${mysql_root_pass} < /app/schema/shipping.sql 
-    fi
-}
 
 JAVA()
 {
