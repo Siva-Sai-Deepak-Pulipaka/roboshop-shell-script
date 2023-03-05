@@ -25,6 +25,7 @@ print_head "set password for mysql"
 echo show databases | mysql -uroot -p${mysql_root_pass} &>>${log_file}
 if [ $? -ne 0 ]; then
 mysql_secure_installation --set-root-pass ${mysql_root_pass} &>>${log_file}
+fi
 status_check $?
 
 
