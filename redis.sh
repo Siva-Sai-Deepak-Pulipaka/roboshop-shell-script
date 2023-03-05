@@ -1,3 +1,4 @@
+source common.sh
 echo -e "\e[33mInstalling repo\e[0m"
 status_check $?
 
