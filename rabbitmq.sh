@@ -26,7 +26,8 @@ status_check $?
 systemctl start rabbitmq-server &>>${log_file}
 status_check $?
 
-print_head "adding username and password"
+print_head "adding user and password"
+rabbitmqctl list_users | grep roboshop &>>${log_file}#here re-run fails because roboshop already exists so we are using a rabbitmqctl list_users displays users in it. so based on grep command we are searching for roboshop and if there dont add user. if not then add the user.
 rabbitmqctl add_user roboshop ${rabbitmq_user_pass} &>>${log_file}
 status_check $?
 
