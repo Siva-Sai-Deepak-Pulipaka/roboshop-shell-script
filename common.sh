@@ -117,12 +117,3 @@ JAVA()
     #Here According to documentation, SYSTEMD_SETUP(systemd enable restart) is to present before the SCHEMA_SETUP but we are placing after schema just to restart after all changes. 
     SYSTEMD_SETUP 
 }
-
-MYSQL_ENTER_PASSWORD_PROMPT()
-{
-    mysql_root_pass=$1
-if [ -z "${mysql_root_pass}" ]; then          # -z will check if the variable is empty. if it is empty returns 0 or else returns 1
-    echo "Enter mysql password"
-    exit 1 
-fi
-}
