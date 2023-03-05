@@ -25,7 +25,7 @@ yum install nodejs -y &>>${log_file}
 status_check $?
 
 print_head "creating roboshop user if not exists"
-id roboshop                     #id command will return either 0 or 1. if exists then 0, if not exists 1
+id roboshop &>>${log_file}                    #id command will return either 0 or 1. if exists then 0, if not exists 1
 if [ $? -ne 0 ]; then           # $? returns status of the previously executed command either 0 or 1 so in our case the 'id roboshop' will return 1 because roboshop not exists when we run first time. This is just an enhancement. No need to worry on mentioning the condition. Even if you don't specify condition, re-run script still works
 useradd roboshop &>>${log_file}
 fi
