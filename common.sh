@@ -97,7 +97,7 @@ SYSTEMD_SETUP()
     cp ${code_dir}/config-files/${component}.service /etc/systemd/system/${component}.service &>>${log_file}
     status_check $?
 
-    sed -i -e "s/rabbitmq_user_pass/${rabbitmq_user_pass}/" /etc/systemd/system/${component}.service &>>${log_file}
+    sed -i -e "s/RABBITMQ_APP_PASSWORD/${rabbitmq_user_pass}/" /etc/systemd/system/${component}.service &>>${log_file}
     print_head "reloading ${component} service "
     systemctl daemon-reload &>>${log_file}
     status_check $?
