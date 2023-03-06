@@ -141,10 +141,21 @@ PYTHON()
 
 GOLANG()
 {
-    yum install golang -y
-    ROBOSHOP_APP_SETUP
-    go mod init dispatch
-    go get 
-    go build
+    print_head "installing golang"
+    yum install golang -y &>>${log_file}
+    status_check $?
+    
+    ROBOSHOP_APP_SETUP #here adding user, creating app directory and downloadng and extracting the component files are same. so we creating a function and calling it wherever needed.
+    
+    print_head "installing dispatch"
+    go mod init dispatch &>>${log_file}
+    status_check $?
+    print_head "getting files"
+    go get &>>${log_file}
+    status_check $?
+    print_head "building files"
+    go build &>>${log_file}
+    status_check $?
+    
     SYSTEMD_SETUP
 }
