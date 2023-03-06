@@ -138,3 +138,21 @@ PYTHON()
     
     SYSTEMD_SETUP
 }
+
+GOLANG()
+{
+    yum install golang -y
+    ROBOSHOP_APP_SETUP
+    go mod init dispatch
+    go get 
+    go build
+    SYSTEMD_SETUP
+}
+ENTER_PASSWORD_PROMPT()
+{
+    rabbitmq_app_pass=$1
+    if [ -z "${rabbitmq_app_pass}" ]; then
+        echo "Enter rabbitmq password along with script"
+        exit 1
+    fi
+}
