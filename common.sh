@@ -149,6 +149,7 @@ GOLANG()
     ROBOSHOP_APP_SETUP #here adding user, creating app directory and downloadng and extracting the component files are same. so we creating a function and calling it wherever needed.
     
     print_head "installing dispatch"
+    cd /app 
     go mod init dispatch &>>${log_file}
     status_check $?
     print_head "getting files"
