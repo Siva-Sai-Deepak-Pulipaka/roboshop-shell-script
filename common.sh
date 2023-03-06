@@ -118,7 +118,7 @@ JAVA()
     print_head "downloading packages and dependencies"
     mvn clean package &>>${log_file}
     mv target/${component}-1.0.jar ${component}.jar &>>${log_file}
-    cp ${code_dir}/config-files/${component}.service /etc/systemd/system/${component}.service &>>${log_file}
+
     
     #here for both mysql and shipping systemctl daemon-reload, enable, and restart are same. so we are creating a function named SYSTEMD_SETUP and calling it.
     SCHEMA_SETUP
