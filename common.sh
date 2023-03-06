@@ -148,7 +148,3 @@ GOLANG()
     go build
     SYSTEMD_SETUP
 }
-ENTER_PASSWORD_PROMPT()
-{
-   
-}
