@@ -4,7 +4,7 @@ Description = Dispatch Service
 User=roboshop
 Environment=AMQP_HOST=rabbitmq.easydevops.online
 Environment=AMQP_USER=roboshop
-Environment=AMQP_PASS=RABBITMQ_APP_PASSWORD
+Environment=AMQP_PASS=DISPATCH_APP_PASSWORD
 ExecStart=/app/dispatch
 SyslogIdentifier=dispatch
 
