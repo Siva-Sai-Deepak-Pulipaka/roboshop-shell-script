@@ -25,14 +25,14 @@ SCHEMA_SETUP()
         print_head "installing mongo client and connected to mongo host to load schema"
         yum install mongodb-org-shell -y &>>${log_file}
         status_check $?
-        mongo --host mongodb.easydevops.online </app/schema/${component}.js &>>${log_file}
+        mongo --host mongodb-dev.easydevops.online </app/schema/${component}.js &>>${log_file}
         status_check $?
     elif [ "${schema_type}" == "mysql" ]; then
         print_head "install mysql client"
         yum install mysql -y &>>${log_file}
 
         print_head "loading mysql shipping schema"
-        mysql -h mysql.easydevops.online -uroot -p${mysql_root_pass} < /app/schema/shipping.sql &>>${log_file}
+        mysql -h mysql-dev.easydevops.online -uroot -p${mysql_root_pass} < /app/schema/shipping.sql &>>${log_file}
     fi
 }
 
