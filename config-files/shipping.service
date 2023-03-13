@@ -3,8 +3,8 @@ Description=Shipping Service
 
 [Service]
 User=roboshop
-Environment=CART_ENDPOINT=cart.easydevops.online:8080
-Environment=DB_HOST=mysql.easydevops.online
+Environment=CART_ENDPOINT=cart-dev.easydevops.online:8080
+Environment=DB_HOST=mysql-dev.easydevops.online
 ExecStart=/bin/java -jar /app/shipping.jar
 SyslogIdentifier=shipping
 
